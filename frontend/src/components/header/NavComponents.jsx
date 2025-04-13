@@ -1,4 +1,4 @@
-import { cn } from "../utils/helpers.js";
+import { cn } from "../../utils/helpers.js";
 import { IconMenu2, IconX, IconWorldLatitude } from "@tabler/icons-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -176,7 +176,7 @@ export const MobileNavToggle = ({ isOpen, onClick }) => {
 export const NavbarLogo = () => {
   return (
     <Link to="#" className="relative z-20 mr-4 flex items-center space-x-1 px-2 py-1 text-sm font-normal text-black">
-      <IconWorldLatitude className="dark:fill-white" stroke={2} />
+      <IconWorldLatitude className="dark:text-white" stroke={2} />
       <span className="font-medium text-black dark:text-white">CINOX</span>
     </Link>
   );
@@ -197,7 +197,7 @@ export const NavbarButton = ({
     primary:
       "shadow-lg dark:bg-white text-white dark:text-black",
     secondary: "bg-transparent shadow-none dark:text-white",
-    dark: "bg-black text-white shadow-lg",
+    dark: "bg-neutral-900 text-white shadow-lg",
     gradient:
       "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-inner",
   };
