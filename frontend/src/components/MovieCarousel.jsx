@@ -181,7 +181,7 @@ export default function MovieCarousel() {
                 </Link>
                 <button
                   onClick={handleTrailerClick}
-                  className="inline-block px-6 py-3 text-lg font-semibold text-white bg-transparent border border-white rounded-md shadow hover:bg-white/20 transition"
+                  className="cursor-pointer inline-block px-6 py-3 text-lg font-semibold text-white bg-transparent border border-white rounded-md shadow hover:bg-white/20 transition"
                 >
                   Trailer
                 </button>
