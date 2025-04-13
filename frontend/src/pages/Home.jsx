@@ -1,11 +1,12 @@
 import React from 'react'
 import { cn } from "../utils/helpers";
+import MovieCarousel from '../components/MovieCarousel';
 
 const Home = () => {
   return (
-    <div><button className={cn("bg-blue-500 text-white px-4 py-2 rounded")}>
-    Click Me
-  </button></div>
+    <div>
+        <MovieCarousel/>
+    </div>
   )
 }
 
