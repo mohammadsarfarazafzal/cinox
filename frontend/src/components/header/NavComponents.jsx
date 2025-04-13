@@ -76,7 +76,7 @@ export const NavItems = ({ items, className, onItemClick }) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium dark:text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
         className
       )}
     >
@@ -84,7 +84,7 @@ export const NavItems = ({ items, className, onItemClick }) => {
         <Link
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
+          className="relative px-4 py-2 text-neutral-100 dark:text-neutral-300"
           key={`link-${idx}`}
           to={item.link}
         >
@@ -164,9 +164,9 @@ export const MobileNavMenu = ({ children, className, isOpen, onClose }) => {
 
 export const MobileNavToggle = ({ isOpen, onClick }) => {
   return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
+    <IconX className="text-neutral-100 dark:text-neutral-300" onClick={onClick} />
   ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+    <IconMenu2 className="text-neutral-100 dark:text-neutral-300" onClick={onClick} />
   );
 };
 
@@ -176,8 +176,8 @@ export const MobileNavToggle = ({ isOpen, onClick }) => {
 export const NavbarLogo = () => {
   return (
     <Link to="#" className="relative z-20 mr-4 flex items-center space-x-1 px-2 py-1 text-sm font-normal text-black">
-      <IconWorldLatitude className="dark:text-white" stroke={2} />
-      <span className="font-medium text-black dark:text-white">CINOX</span>
+      <IconWorldLatitude className="text-neutral-100 dark:text-neutral-300" stroke={2} />
+      <span className="font-medium text-neutral-100 dark:text-neutral-300">CINOX</span>
     </Link>
   );
 };
@@ -191,15 +191,12 @@ export const NavbarButton = ({
   ...props
 }) => {
   const baseStyles =
-    "px-4 py-2 rounded-md bg-gray-800 dark:bg-transparent text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "px-4 py-2 rounded-md text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
   const variantStyles = {
     primary:
-      "shadow-lg dark:bg-white text-white dark:text-black",
-    secondary: "bg-transparent shadow-none dark:text-white",
-    dark: "bg-neutral-900 text-white shadow-lg",
-    gradient:
-      "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-inner",
+      "shadow-lg text-black bg-white",
+    secondary: "bg-transparent shadow-none text-neutral-100 dark:text-neutral-300",
   };
 
   return (

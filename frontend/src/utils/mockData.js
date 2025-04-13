@@ -168,6 +168,13 @@ export const users = [
   }
 ]
 
+export const cinemas = [
+    { id: 1, name: "Downtown IMAX", location: "123 Main St", screens: 8 },
+    { id: 2, name: "Central Multiplex", location: "456 Broadway", screens: 6 },
+    { id: 3, name: "Riverside Cinema", location: "789 River Rd", screens: 5 },
+    { id: 4, name: "Park Street Theater", location: "101 Park Ave", screens: 4 }
+  ];
+
 export const bookings = [
   {
     id: 1,
