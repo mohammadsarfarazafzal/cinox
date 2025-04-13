@@ -6,8 +6,6 @@ import Movies from '../pages/Movies';
 import MovieDetails from '../pages/MovieDetails';
 import Booking from '../pages/Booking';
 import Payment from '../pages/Payment';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
 import AdminDashboard from '../pages/AdminDashboard';
 
 const ProtectedRoute = ({ children, requireAdmin }) => {
@@ -17,9 +15,9 @@ const ProtectedRoute = ({ children, requireAdmin }) => {
     return <div className="flex justify-center items-center h-48">Loading...</div>;
   }
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+  // if (!user) {
+  //   return <Navigate to="/login" />;
+  // }
 
   if (requireAdmin && !user.isAdmin) {
     return <Navigate to="/" />;
@@ -35,8 +33,6 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/movies" element={<Movies />} />
       <Route path="/movies/:id" element={<MovieDetails />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
 
       {/* Protected routes */}
       <Route

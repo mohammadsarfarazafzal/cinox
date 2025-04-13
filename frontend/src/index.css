@@ -7,14 +7,3 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
-
-/* @layer base {
-  html {
-    font-family: var(--font-display);
-  }
-
-  body {
-    background-color: black;
-    color: white;
-  }
-} */

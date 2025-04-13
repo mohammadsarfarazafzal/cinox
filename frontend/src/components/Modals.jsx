@@ -112,7 +112,7 @@ export function TrailerModal({ isOpen, onClose, trailerUrl, title }) {
           />
           {/* Modal Content */}
           <motion.div
-            className="relative z-50 w-full max-w-2xl bg-white dark:bg-neutral-900 rounded-xl shadow-xl overflow-hidden"
+            className="relative m-3 z-50 w-full max-w-2xl bg-white dark:bg-neutral-900 rounded-xl shadow-xl overflow-hidden"
             initial={{ scale: 0.9, opacity: 0, y: 40 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 40 }}
