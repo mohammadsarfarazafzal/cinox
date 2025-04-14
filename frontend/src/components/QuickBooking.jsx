@@ -99,14 +99,14 @@ const QuickBooking = () => {
   const dropdownBase =
     "appearance-none w-full text-xs p-1.5 rounded border transition focus:outline-none";
   const enabledDropdown =
-    "bg-white text-black dark:bg-neutral-900 dark:text-white border-gray-600 dark:border-white/30 hover:bg-gray-100 dark:hover:bg-white/10";
+    "bg-white text-black dark:bg-neutral-900 dark:text-white border-gray-800/95 dark:border-white/30 hover:bg-gray-100 dark:hover:bg-white/10";
   const disabledDropdown =
     "bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-gray-500 cursor-not-allowed border-gray-400 dark:border-white/20";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="m-2 flex flex-col md:flex-row items-center justify-between gap-3 px-4 py-3 bg-white dark:bg-white/10 border backdrop-blur-md border-gray-200 dark:border-white/20 rounded-xl shadow-sm"
+      className="m-2 flex flex-col md:flex-row items-center justify-between gap-3 px-4 py-3 bg-white dark:bg-white/10 border backdrop-blur-md border-gray-800/95 dark:border-white/20 rounded-xl shadow-sm"
     >
       {/* Title + Toggle */}
       <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ const QuickBooking = () => {
               onClick={() => setBookingType(type)}
               className={`text-xs px-2 py-1 rounded ${
                 bookingType === type
-                  ? "bg-black text-white dark:bg-white dark:text-black"
+                  ? "bg-gray-800/95 text-white dark:bg-white dark:text-black"
                   : "bg-gray-200 text-black dark:bg-neutral-900 dark:text-white"
               }`}
             >

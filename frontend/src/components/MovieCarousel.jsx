@@ -48,7 +48,7 @@ export default function MovieCarousel() {
   };
 
   return (
-    <div className="relative flex items-center justify-center w-full lg:h-screen h-[650px] overflow-hidden">
+    <div className="relative flex items-center justify-center w-full lg:h-screen h-[600px] overflow-hidden">
       {/* Carousel Slides */}
       <AnimatePresence initial={false} custom={direction}>
         <motion.div

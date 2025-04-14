@@ -195,7 +195,7 @@ export const NavbarButton = ({
 
   const variantStyles = {
     primary:
-      "shadow-lg text-black bg-white",
+      "shadow-lg dark:shadow-none lg:shadow-none shadow-neutral-400 text-black bg-white",
     secondary: "bg-transparent shadow-none text-neutral-100 dark:text-neutral-300",
   };
 
