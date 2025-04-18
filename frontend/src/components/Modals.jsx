@@ -106,7 +106,7 @@ export const LoginModal = ({ isOpen, onClose, onSwitch }) => {
         </div>
         <button
           type="submit"
-          className="w-full bg-black dark:bg-white text-white dark:text-black px-3 py-2 rounded-md text-sm font-semibold hover:opacity-90 transition"
+          className="w-full cursor-pointer bg-black dark:bg-white text-white dark:text-black px-3 py-2 rounded-md text-sm font-semibold hover:opacity-90 transition"
         >
           Login
         </button>
@@ -163,7 +163,7 @@ export const RegisterModal = ({ isOpen, onClose, onSwitch }) => {
         </div>
         <button
           type="submit"
-          className="w-full bg-black dark:bg-white text-white dark:text-black px-3 py-2 rounded-md text-sm font-semibold hover:opacity-90 transition"
+          className="w-full cursor-pointer bg-black dark:bg-white text-white dark:text-black px-3 py-2 rounded-md text-sm font-semibold hover:opacity-90 transition"
         >
           Register
         </button>
