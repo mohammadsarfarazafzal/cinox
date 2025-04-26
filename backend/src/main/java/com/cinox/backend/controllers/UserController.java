@@ -10,7 +10,7 @@ public class UserController {
 
 	@GetMapping
 	public String test() {
-		return "kya kar rahe ho bhai";
+		return "<center><h1>Application Running!</h1></center>";
 	}
 	
 }

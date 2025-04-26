@@ -52,7 +52,7 @@ public class UserDTO {
 	private enum Role{
 		user, admin
 	}
-	private Role role;
+	private Role role = Role.user;
 	
 	@JsonIgnoreProperties("user") // To prevent infinite recursion
 	private List<BookingDTO> bookings;
