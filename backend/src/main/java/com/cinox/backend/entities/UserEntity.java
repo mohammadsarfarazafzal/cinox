@@ -1,6 +1,7 @@
 package com.cinox.backend.entities;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,6 +19,10 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.cinox.backend.enums.Gender;
+import com.cinox.backend.enums.MaritalStatus;
+import com.cinox.backend.enums.UserRole;
 
 @Entity
 @Table(name="users")
@@ -51,24 +56,15 @@ public class UserEntity {
     @Column(nullable=false)
 	private LocalDate dob;
     
-	private enum Gender{
-		male, female
-	}
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	
-	private enum Marital{
-		married, unmarried
-	}
 	@Enumerated(EnumType.STRING)
-	private Marital maritalStatus;
+	private MaritalStatus maritalStatus;
 	
-	private enum Role{
-		user, admin
-	}
 	@Enumerated(EnumType.STRING)
     @Column(nullable = false)
-	private Role role = Role.user;
+	private UserRole role = UserRole.USER;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore

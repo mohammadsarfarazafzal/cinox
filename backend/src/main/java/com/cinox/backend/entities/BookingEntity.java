@@ -57,8 +57,6 @@ public class BookingEntity {
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate;
 
-    // Constructors, getters, setters
-
     @PrePersist
     protected void onCreate() {
         bookingDate = LocalDateTime.now();

@@ -1,6 +1,7 @@
 package com.cinox.backend.dto;
 
 import jakarta.validation.constraints.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.cinox.backend.enums.*;
 
 @Data
 @AllArgsConstructor
@@ -39,20 +42,12 @@ public class UserDTO {
 	@Past(message = "Date of birth must be in the past")
 	private LocalDate dob;
 	
-	private enum Gender{
-		male, female
-	}
 	private Gender gender;
 	
-	private enum Marital{
-		married, unmarried
-	}
-	private Marital maritalStatus;
+	private MaritalStatus maritalStatus;
 	
-	private enum Role{
-		user, admin
-	}
-	private Role role = Role.user;
+	private UserRole role = UserRole.USER;
+	
 	
 	@JsonIgnoreProperties("user") // To prevent infinite recursion
 	private List<BookingDTO> bookings;
