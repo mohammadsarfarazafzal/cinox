@@ -1,18 +1,24 @@
 package com.cinox.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property  = "id"
+)
+
 public class ShowDTO {
 
     private Long id;
@@ -31,18 +37,17 @@ public class ShowDTO {
     
     @NotNull(message = "Gold price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Gold price must be greater than 0")
-    private BigDecimal goldPrice;
+    private double goldPrice;
     
     @NotNull(message = "Platinum price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Platinum price must be greater than 0")
-    private BigDecimal platinumPrice;
+    private double platinumPrice;
     
     @NotNull(message = "Silver price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Silver price must be greater than 0")
-    private BigDecimal silverPrice;
+    private double silverPrice;
     
     private boolean isActive = true;
-    
-    @JsonIgnoreProperties("show") // To prevent infinite recursion
+
     private List<BookingDTO> bookings;
 }

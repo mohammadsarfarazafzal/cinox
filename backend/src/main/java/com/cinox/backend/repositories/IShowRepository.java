@@ -1,11 +1,9 @@
 package com.cinox.backend.repositories;
 
+import com.cinox.backend.entities.ShowEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cinox.backend.entities.UserEntity;
-
 @Repository
-public interface IUserRepository extends JpaRepository<UserEntity, Long> {
-	UserEntity findByEmail(String email);
+public interface IShowRepository extends JpaRepository<ShowEntity, Long> {
 }

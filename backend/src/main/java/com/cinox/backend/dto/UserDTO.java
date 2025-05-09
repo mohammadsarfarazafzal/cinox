@@ -1,5 +1,7 @@
 package com.cinox.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.validation.constraints.*;
 
 import lombok.AllArgsConstructor;
@@ -8,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import com.cinox.backend.enums.*;
 
@@ -16,9 +17,14 @@ import com.cinox.backend.enums.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property  = "id"
+)
+
 public class UserDTO {
 
-	private Long id;
+	private int id;
 	
 	@NotBlank(message = "Full name is required")
     @Size(max = 100, message = "Full name cannot exceed 100 characters")
@@ -47,8 +53,6 @@ public class UserDTO {
 	private MaritalStatus maritalStatus;
 	
 	private UserRole role = UserRole.USER;
-	
-	
-	@JsonIgnoreProperties("user") // To prevent infinite recursion
+
 	private List<BookingDTO> bookings;
 }

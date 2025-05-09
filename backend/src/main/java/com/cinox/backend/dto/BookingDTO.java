@@ -1,9 +1,9 @@
 package com.cinox.backend.dto;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property  = "id"
+)
 
 public class BookingDTO {
 
@@ -23,17 +28,19 @@ public class BookingDTO {
     @NotNull(message = "Show is required")
     private ShowDTO show;
 
-    @NotBlank(message = "Seat class is required")
-    private String seatClass;
-
-    @Min(value = 1, message = "Must book at least 1 ticket")
-    private int nTickets;
+    @NotBlank(message = "Payment is required")
+    private String razorpayOrderId;
 
     @NotNull(message = "Total amount is required")
-    private BigDecimal totalAmount;
+    private double totalAmount;
 
-    private LocalDateTime bookingDate;
+    private String bookingDate;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @NotBlank(message = "Seat is required")
-    private List<String> seatNumbers;
+    private String seatNumbers;
+
+    private String status = "Processing";
+
 }

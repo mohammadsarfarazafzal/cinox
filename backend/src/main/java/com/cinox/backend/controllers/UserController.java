@@ -19,7 +19,7 @@ import com.cinox.backend.services.IUserService;
 
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
 	@Autowired

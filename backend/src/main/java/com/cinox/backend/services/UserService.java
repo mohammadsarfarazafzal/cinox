@@ -33,7 +33,10 @@ public class UserService implements IUserService {
 	public UserDTO updateUser(UserDTO user) {
 		// TODO Auto-generated method stub
 		UserEntity userEntity = mapper.map(user, UserEntity.class);
-		return mapper.map(userRepository.save(userEntity), UserDTO.class);
+		if (userEntity.getId()!=null){
+			return mapper.map(userRepository.save(userEntity), UserDTO.class);
+		}
+		return null;
 	}
 	@Override
 	public String deleteUser(Long id) {

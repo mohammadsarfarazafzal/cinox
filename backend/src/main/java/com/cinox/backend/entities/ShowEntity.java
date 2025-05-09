@@ -46,13 +46,13 @@ public class ShowEntity {
     private LocalDateTime endTime;
     
     @Column(name = "gold_price", nullable = false)
-    private BigDecimal goldPrice;
+    private double goldPrice;
     
     @Column(name = "platinum_price", nullable = false)
-    private BigDecimal platinumPrice;
+    private double platinumPrice;
     
     @Column(name = "silver_price", nullable = false)
-    private BigDecimal silverPrice;
+    private double silverPrice;
     
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true;

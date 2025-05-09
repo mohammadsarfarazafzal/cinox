@@ -1,16 +1,23 @@
 package com.cinox.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property  = "id"
+)
+
 public class TheaterDTO {
 
     private Long id;
@@ -33,7 +40,6 @@ public class TheaterDTO {
     private int totalScreens;
     
     private String theaterPhotoUrl;
-    
-    @JsonIgnoreProperties("theater") // To prevent infinite recursion
+
     private List<ScreenDTO> screens;
 }
