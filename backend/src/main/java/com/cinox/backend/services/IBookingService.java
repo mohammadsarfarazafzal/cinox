@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IBookingService {
     public BookingDTO addBooking(BookingDTO booking);
+    public BookingDTO updateBooking(BookingDTO booking);
     public String deleteBooking(Long id);
     public List<BookingDTO> getAll();
     public BookingDTO getBookingById(Long id);

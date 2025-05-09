@@ -37,6 +37,6 @@ public class PaymentDTO {
     private LocalDateTime paidAt = LocalDateTime.now();
 
     @NotNull(message = "Booking is required")
-    private BookingEntity booking;
+    private BookingDTO booking;
 
 }

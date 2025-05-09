@@ -1,8 +1,6 @@
 package com.cinox.backend.controllers;
 
-import com.cinox.backend.dto.BookingDTO;
-import com.cinox.backend.dto.BookingRequestDTO;
-import com.cinox.backend.dto.UserDTO;
+import com.cinox.backend.dto.*;
 import com.cinox.backend.services.IBookingService;
 import com.cinox.backend.services.IPaymentService;
 import com.cinox.backend.services.IUserService;
@@ -65,6 +63,26 @@ public class PaymentController {
         bookingService.addBooking(booking);
 
         return ResponseEntity.ok(booking);
+    }
+
+    @PostMapping(value="confirmPayment")
+    public PaymentDTO confirmPayment(@RequestBody ConfirmPaymentRequestDTO crequest) {
+        System.out.println("razororderid "+crequest.getRazorpayOrderId());
+        BookingDTO booking = bookingService.getRazorpayOrderId(crequest.getRazorpayOrderId());
+
+        if (booking == null)
+            return null;
+
+        PaymentDTO payment = new PaymentDTO();
+        payment.setBooking(booking);
+        payment.setRazorpayPaymentId(crequest.getRazorpayPaymentId());
+        payment.setAmount(booking.getTotalAmount());
+        payment.setStatus("SUCCESS");
+
+        booking.setStatus("PAID");
+        bookingService.updateBooking(booking);
+        paymentService.addPayment(payment);
+        return payment;
     }
 
 }

@@ -26,6 +26,15 @@ public class BookingService implements IBookingService{
     }
 
     @Override
+    public BookingDTO updateBooking(BookingDTO booking) {
+        BookingEntity entity = mapper.map(booking, BookingEntity.class);
+        if (entity.getId()!=null){
+            return mapper.map(bookingRepository.save(entity), BookingDTO.class);
+        }
+        return null;
+    }
+
+    @Override
     public String deleteBooking(Long id) {
         Optional<BookingEntity> entity = bookingRepository.findById(id);
         if (entity.isPresent()){
