@@ -24,7 +24,7 @@ import com.cinox.backend.enums.*;
 
 public class UserDTO {
 
-	private int id;
+	private Long id;
 	
 	@NotBlank(message = "Full name is required")
     @Size(max = 100, message = "Full name cannot exceed 100 characters")
