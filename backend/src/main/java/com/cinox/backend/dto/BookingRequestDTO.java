@@ -12,4 +12,6 @@ public class BookingRequestDTO {
     private String bookingDate;
     private double totalAmount;
     private Long userId;
+    private Long showId;
+    private String seatNumbers;
 }

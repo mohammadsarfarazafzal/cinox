@@ -2,8 +2,10 @@ package com.cinox.backend.controllers;
 
 import com.cinox.backend.dto.BookingDTO;
 import com.cinox.backend.dto.BookingRequestDTO;
+import com.cinox.backend.dto.ShowDTO;
 import com.cinox.backend.dto.UserDTO;
 import com.cinox.backend.services.IBookingService;
+import com.cinox.backend.services.IShowService;
 import com.cinox.backend.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ public class BookingController {
 
     @Autowired
     IUserService userService;
+
+    @Autowired
+    IShowService showService;
 
     @GetMapping(value="/")
     public List<BookingDTO> getAll()
@@ -51,6 +56,7 @@ public class BookingController {
         System.out.println("User Id: "+bookingRequest.getUserId());
         Long userid = bookingRequest.getUserId();
         UserDTO user = userService.getUserById(userid);
+        ShowDTO show = showService.getShowById(bookingRequest.getShowId());
         BookingDTO booking = new BookingDTO();
         if(user==null)
         {
@@ -62,6 +68,8 @@ public class BookingController {
         booking.setTotalAmount(bookingRequest.getTotalAmount());
         System.out.println("Booking Date "+booking.getBookingDate().toString());
         booking.setUser(user);
+        booking.setShow(show);
+        booking.setSeatNumbers(bookingRequest.getSeatNumbers());
         bookingService.addBooking(booking);
         return ResponseEntity.ok(booking);
     }

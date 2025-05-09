@@ -41,7 +41,7 @@ public class BookingService implements IBookingService{
             bookingRepository.delete(entity.get());
             return "Booking deleted, Non refundable.";
         }
-        return "No booking found with id"+id;
+        return "No booking found with id "+id;
     }
 
     @Override

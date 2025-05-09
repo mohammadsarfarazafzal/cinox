@@ -3,6 +3,7 @@ package com.cinox.backend.controllers;
 import com.cinox.backend.dto.*;
 import com.cinox.backend.services.IBookingService;
 import com.cinox.backend.services.IPaymentService;
+import com.cinox.backend.services.IShowService;
 import com.cinox.backend.services.IUserService;
 import com.razorpay.RazorpayClient;
 import org.json.JSONObject;
@@ -32,6 +33,9 @@ public class PaymentController {
     @Autowired
     IBookingService bookingService;
 
+    @Autowired
+    IShowService showService;
+
     @GetMapping(value="getRazorpayOrderId/{id}")
     public BookingDTO getRazorId(@PathVariable("id") String id)
     {
@@ -55,17 +59,19 @@ public class PaymentController {
         String formattedDate = booking.getCreatedAt().format(formatter);
         booking.setBookingDate(formattedDate);
         UserDTO user = userService.getUserById(request.getUserId());
-
+        ShowDTO show = showService.getShowById(request.getShowId());
         booking.setUser(user);
+        booking.setShow(show);
         booking.setRazorpayOrderId(razorOrder.get("id"));
         booking.setTotalAmount(total);
         booking.setStatus("Booked");
+        booking.setSeatNumbers(request.getSeatNumbers());
         bookingService.addBooking(booking);
 
         return ResponseEntity.ok(booking);
     }
 
-    @PostMapping(value="confirmPayment")
+    @PostMapping(value="confirm")
     public PaymentDTO confirmPayment(@RequestBody ConfirmPaymentRequestDTO crequest) {
         System.out.println("razororderid "+crequest.getRazorpayOrderId());
         BookingDTO booking = bookingService.getRazorpayOrderId(crequest.getRazorpayOrderId());
