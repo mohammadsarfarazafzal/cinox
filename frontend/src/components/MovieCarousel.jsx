@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {getYoutubeEmbedUrl} from '../utils/helpers.js'
 import { TrailerModal } from "./Modals.jsx";
-import { movies } from "../utils/mockData.js";
 
 const slideVariants = {
   enter: (direction) => ({
@@ -19,15 +18,19 @@ const slideVariants = {
 
 const swipeConfidenceThreshold = 100;
 
-export default function MovieCarousel() {
+export default function MovieCarousel({shows}) {
   const [[page, direction], setPage] = useState([0, 0]);
-  // State to hold a snapshot of the selected movie when opening a trailer.
+  
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [hoveredDot, setHoveredDot] = useState(null);
+  const nowShowingMovies = shows?.filter(show => show.active) || [];
 
-  const movieIndex = (page % movies.length + movies.length) % movies.length;
-  const movie = movies[movieIndex];
+  const movieIndex = (page % nowShowingMovies.length + nowShowingMovies.length) % nowShowingMovies.length;
+  const movie = nowShowingMovies[movieIndex].movie;
+  const showId = nowShowingMovies[movieIndex].id;
+  const theater = nowShowingMovies[movieIndex].screen.theater;
+  const showTime = new Date(nowShowingMovies[movieIndex].showTime);
 
   const paginate = (newDirection) => {
     setPage([page + newDirection, newDirection]);
@@ -41,14 +44,14 @@ export default function MovieCarousel() {
     return () => clearInterval(timer);
   }, [page]);
 
-  // Handler for Trailer button click; capture a snapshot of the movie
+  
   const handleTrailerClick = () => {
     setSelectedMovie(movie);
     setIsTrailerOpen(true);
   };
 
   return (
-    <div className="relative flex items-center justify-center w-full lg:h-screen h-[600px] overflow-hidden">
+    <div className="relative flex items-center justify-center w-full h-[80vh] lg:h-[calc(100vh-5rem)] overflow-hidden mb-3">
       {/* Carousel Slides */}
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
@@ -73,31 +76,41 @@ export default function MovieCarousel() {
           className="absolute top-0 left-0 w-full h-full"
         >
           <img
-            src={movie.backdrop}
+            src={movie.backdropUrl}
             alt={movie.title}
             className="w-full h-full object-cover"
           />
-          {/* Frozen Glass Overlay positioned at Bottom-Left */}
           <div className="absolute inset-0 flex items-end justify-start">
             <div className="mx-4 mb-8 max-w-lg rounded-xl p-6 bg-gray-800/25 shadow-lg backdrop-blur-lg border border-white/30">
               <h2 className="text-3xl font-bold text-white drop-shadow-md">{movie.title}</h2>
               <p className="mt-2 text-lg text-white/90 drop-shadow-sm hidden sm:block">{movie.description}</p>
-              {/* Additional Info */}
+             
               <div className="mt-4 text-white text-sm space-y-1">
                 <div>
-                  <span className="font-semibold">Duration:</span> {movie.duration}
+                  <span className="font-semibold">Duration:</span>{' '}
+                  {Math.floor(movie.durationMins / 60)}h {movie.durationMins % 60}m
                 </div>
                 <div>
-                  <span className="font-semibold">Genre:</span> {movie.genre.join(", ")}
+                  <span className="font-semibold">Genre:</span> {movie.genre}
                 </div>
                 <div>
-                  <span className="font-semibold">Rating:</span> {movie.rating}
+                  <span className="font-semibold">Cast:</span> {movie.cast}
+                </div>
+                <div>
+                  <span className="font-semibold">Theater:</span> {theater.name}
+                </div>
+                <div>
+                  <span className="font-semibold">Show Time:</span> {showTime.toLocaleTimeString('en-US', { 
+                            hour: '2-digit', 
+                            minute: '2-digit',
+                            hour12: true 
+                          })}
                 </div>
               </div>
               {/* Buttons */}
               <div className="mt-6 flex gap-4">
                 <Link
-                  to={`/movies/${movie.id}`}
+                  to={`/booking/${showId}`}
                   className="inline-block px-6 py-3 text-lg font-bold text-black bg-white rounded-md shadow hover:-translate-y-0.5 transition duration-200"
                 >
                   Book
@@ -116,7 +129,10 @@ export default function MovieCarousel() {
 
       {/* Vertical Pagination Dots on Right with Tooltip */}
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
-        {movies.map((movieItem, idx) => (
+        {nowShowingMovies.map((movieItem, idx) => {
+          const movieName = movieItem.movie;
+          return (
+
           <div key={idx} className="relative flex items-center">
             <button
               onClick={() => setPage([idx, idx > movieIndex ? 1 : -1])}
@@ -134,14 +150,14 @@ export default function MovieCarousel() {
                 transition={{ duration: 0.3 }}
                 className="absolute right-8 whitespace-nowrap text-sm text-white"
               >
-                {movieItem.title}
+                {movieName.title}
               </motion.div>
             )}
           </div>
-        ))}
+        )})}
       </div>
 
-      {/* Trailer Modal */}
+      
       <TrailerModal
         isOpen={isTrailerOpen}
         onClose={() => setIsTrailerOpen(false)}

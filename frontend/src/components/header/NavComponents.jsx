@@ -4,12 +4,10 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-
 import { Link } from "react-router-dom";
 import React, { useRef, useState } from "react";
 
-// ---------------------------
+
 // Navbar Container Component
-// ---------------------------
 export const Navbar = ({ children, className }) => {
   const ref = useRef(null);
-  // Track the scroll on the ref element
   const { scrollY } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const [visible, setVisible] = useState(false);
 
@@ -24,7 +22,6 @@ export const Navbar = ({ children, className }) => {
   return (
     <motion.div
       ref={ref}
-      // Use "sticky" for the navbar that changes style after scrolling
       className={cn("fixed inset-x-0 top-2 z-40 w-full", className)}
     >
       {React.Children.map(children, (child) =>
@@ -36,9 +33,9 @@ export const Navbar = ({ children, className }) => {
   );
 };
 
-// -------------------------
+
 // Desktop Navbar Component
-// -------------------------
+
 export const NavBody = ({ children, className, visible }) => {
   return (
     <motion.div
@@ -47,7 +44,7 @@ export const NavBody = ({ children, className, visible }) => {
         boxShadow: visible
           ? "0 0 24px rgba(34,42,53,0.06), 0 1px 1px rgba(0,0,0,0.05), 0 0 0 1px rgba(34,42,53,0.04), 0 0 4px rgba(34,42,53,0.08), 0 16px 68px rgba(47,48,55,0.05), 0 1px 0 rgba(255,255,255,0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
+        width: visible ? "90%" : "100%",
         y: visible ? 20 : 0,
       }}
       transition={{
@@ -55,11 +52,8 @@ export const NavBody = ({ children, className, visible }) => {
         stiffness: 200,
         damping: 50,
       }}
-      style={{
-        minWidth: "900px",
-      }}
       className={cn(
-        "bg-gray-800/25 relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full px-4 py-2 border border-white/30 lg:flex",
+        "bg-gray-800/25 relative mx-auto hidden w-full max-w-7xl flex-row items-center justify-between rounded-full px-4 py-2 border border-white/30 lg:flex",
         visible && "bg-gray-800/25 dark:bg-gray-800/25",
         className
       )}
@@ -76,7 +70,7 @@ export const NavItems = ({ items, className, onItemClick }) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium dark:text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-gray-600 dark:text-gray-300 transition duration-200 lg:flex lg:space-x-2",
         className
       )}
     >
@@ -84,14 +78,14 @@ export const NavItems = ({ items, className, onItemClick }) => {
         <Link
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2 text-neutral-100 dark:text-neutral-300"
+          className="relative px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors"
           key={`link-${idx}`}
           to={item.link}
         >
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-800/20 dark:bg-neutral-800/65"
+              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800/65"
             />
           )}
           <span className="relative z-20 flex justify-center items-center gap-1">{item.icon}{item.name}</span>
@@ -101,9 +95,9 @@ export const NavItems = ({ items, className, onItemClick }) => {
   );
 };
 
-// -------------------------
+
 // Mobile Navbar Components
-// -------------------------
+
 export const MobileNav = ({ children, className, visible }) => {
   return (
     <motion.div
@@ -170,14 +164,14 @@ export const MobileNavToggle = ({ isOpen, onClick }) => {
   );
 };
 
-// -------------------------
+
 // Navbar Logo and Buttons
-// -------------------------
+
 export const NavbarLogo = () => {
   return (
     <Link to="#" className="relative z-20 mr-4 flex items-center space-x-1 px-2 py-1 text-sm font-normal text-black">
-      <IconWorldLatitude className="text-neutral-100 dark:text-neutral-300" stroke={2} />
-      <span className="font-medium text-neutral-100 dark:text-neutral-300">CINOX</span>
+      <IconWorldLatitude className="text-gray-600 dark:text-neutral-300" stroke={2} />
+      <span className="font-medium text-gray-600 dark:text-neutral-300">CINOX</span>
     </Link>
   );
 };

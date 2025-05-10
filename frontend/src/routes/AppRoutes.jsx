@@ -1,25 +1,25 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-
-// Pages
+import { useAuth } from "../auth/AuthContext";
 import Home from '../pages/Home';
-import Movies from '../pages/Movies';
-import MovieDetails from '../pages/MovieDetails';
 import Booking from '../pages/Booking';
-import Payment from '../pages/Payment';
-import AdminDashboard from '../pages/AdminDashboard';
+import Dashboard from '../pages/admin/Dashboard';
+import MyBookings from '../pages/MyBookings';
+ import { toast } from 'react-toastify';
 
 const ProtectedRoute = ({ children, requireAdmin }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, isAuthenticated } = useAuth();
+  const notify = () => toast.error("Login to Continue");
 
   if (loading) {
     return <div className="flex justify-center items-center h-48">Loading...</div>;
   }
 
-  // if (!user) {
-  //   return <Navigate to="/login" />;
-  // }
+  if (!isAuthenticated) {
+    notify();
+    return <Navigate to="/" />;
+  }
 
-  if (requireAdmin && !user.isAdmin) {
+  if (requireAdmin && user?.isAdmin) {
     return <Navigate to="/" />;
   }
 
@@ -29,12 +29,8 @@ const ProtectedRoute = ({ children, requireAdmin }) => {
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public routes */}
       <Route path="/" element={<Home />} />
-      <Route path="/movies" element={<Movies />} />
-      <Route path="/movies/:id" element={<MovieDetails />} />
 
-      {/* Protected routes */}
       <Route
         path="/booking"
         element={
@@ -52,10 +48,10 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/payment"
+        path="/bookings"
         element={
           <ProtectedRoute>
-            <Payment />
+            <MyBookings />
           </ProtectedRoute>
         }
       />
@@ -63,12 +59,12 @@ const AppRoutes = () => {
         path="/admin"
         element={
           <ProtectedRoute requireAdmin={true}>
-            <AdminDashboard />
+            <Dashboard />
           </ProtectedRoute>
         }
       />
 
-      {/* Fallback route */}
+      
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

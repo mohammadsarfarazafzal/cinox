@@ -21,7 +21,7 @@ const MovieCard = ({ movie, className }) => {
       <Link to={`/movies/${movie?.id}`}>
         <div className="relative aspect-[2/3] overflow-hidden">
           <motion.img
-            src={movie?.poster}
+            src={movie?.posterUrl}
             alt={movie?.title}
             className="h-full w-full object-cover"
             loading="lazy"
