@@ -29,12 +29,10 @@ public class BookingEntity {
 	@Column(name="booking_id")
     private Long id;
 
-    // Many bookings → One user
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
-    // Many bookings → One show
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id", nullable = false)
     private ShowEntity show;
