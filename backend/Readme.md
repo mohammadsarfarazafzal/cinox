@@ -1,6 +1,6 @@
 # CINOX Backend
 
-A robust Spring Boot backend for the CINOX movie booking system, providing secure REST APIs and efficient data management.
+A robust Java Spring Boot backend for the CINOX movie booking system, providing secure REST APIs and efficient data management.
 
 ## Features
 
